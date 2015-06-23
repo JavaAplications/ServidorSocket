@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -20,10 +21,16 @@ public class Servidor {
 		
 		
 		public void inicio(){
+			try {
+				server =new ServerSocket(Puerto);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			while(true){
 			try {
 				
-				server =new ServerSocket(Puerto);
 				socket=new Socket();
 				System.out.println("Esperando Cliente");
 				socket=server.accept();
@@ -33,8 +40,8 @@ public class Servidor {
 				salida=new DataOutputStream(socket.getOutputStream());
 				salida.writeUTF("Servidor:"+mensaje);
 				System.out.println("Servidor: "+mensaje);
-			socket.close();
-			server.close();
+		//	socket.close();
+		//	server.close();
 				
 				
 				
